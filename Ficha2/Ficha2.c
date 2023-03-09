@@ -138,15 +138,56 @@ int fib2 (int n) {
 
 int main () {
     
-    // 1ª opçao:
-    //int count = 0;
-    //float r = multInt2MExtra (126,45,&count);
+    int n, i;
+    float m;
+    int count = 0;
 
-    //2ª opçao: Precisa-se de alocar memoria para o apontador
-    int *count = malloc(sizeof(int));
-    *count = 0;
-    float r = multInt2MExtra (126,45, count);
-    
-    printf ("%f\n",r);
+    printf("Introduz o numero da pergunta: ");
+    char opcao = getchar();
+
+    switch(opcao) {
+
+        case '1':{
+        printf("Introduz dois numeros: ");
+        scanf("%d %f", &n, &m);
+        printf("O produto de %d por %f é %f.\n", n, m, multInt1(n,m));
+        break;
+        }
+
+        case '2':{
+        printf("Introduz dois numeros: ");
+        scanf("%d %f", &n, &m);
+        printf("O produto de %d por %f é %f.\n", n, m, multInt2MExtra(n,m,&count));
+        break;
+        }
+
+        case '3':{
+        printf("Introduz dois numeros: ");
+        scanf("%d %d", &n, &i);
+        printf("O máximo divisor comum entre %d e %d é %d.\n", n, i, mdc1(n,i));
+        break;
+        }
+
+        case '4':{
+        printf("Introduz dois numeros: ");
+        scanf("%d %d", &n, &i);
+        printf("O máximo divisor comum entre %d e %d é %d.\n", n, i, mdc2M(n,i));
+        break;
+        }
+
+        case '5':{
+        printf("Introduz dois numeros: ");
+        scanf("%d %d", &n, &i);
+        printf("O máximo divisor comum entre %d e %d é %d.\n", n, i, mdc3(n,i));
+        break;
+        }
+
+        case '6':{
+        printf("Introduz um numero: ");
+        scanf("%d", &n);
+        printf("O %d-ésimo número da sequência de Fibonacci é %d.\n", n, fib1(n));
+        break;
+        }
+    }    
     return 0;
 }

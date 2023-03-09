@@ -130,13 +130,13 @@ void pascalB (int v[], int N) {
 int main() {
     int n, m;
     int v[50], tamanho;
-    printf("Introduz o numero da pergunta: ");
+    printf("Introduza o numero da pergunta: ");
     char opcao = getchar();
 
     switch(opcao) {
 
         case '2':{
-        printf("Introduz dois numeros: ");
+        printf("Introduza dois numeros: ");
         scanf("%d %d", &n, &m);
         swapM(&n,&m);
         printf("%d %d\n", n, m);
@@ -145,27 +145,27 @@ int main() {
 
         case '3':{
 
-        printf("Introduz o tamanho do array: ");
+        printf("Introduza o tamanho do array: ");
         scanf("%d", &tamanho);
         printf("Introduz um array com espaços: ");
         for (int i = 0; i < tamanho; i++) {
             scanf("%d", &v[i]);
         }
-        printf("Introduz as posiçoes a serem trocadas: ");
+        printf("Introduza as posiçoes a serem trocadas: ");
         scanf("%d %d", &n, &m);
         swap(v,n,m);
         for(int j = 0; j < tamanho; j++) {
-            printf("%d", v[j]);
+            if (j < tamanho - 1) printf("%d -", v[j]);
+            else printf("%d\n",v[j]);
         }
-        printf("\n");
         break;
         }
 
         case '4':{
         
-        printf("Introduz o tamanho do array: ");
+        printf("Introduza o tamanho do array: ");
         scanf("%d", &tamanho);
-        printf("Introduz um array com espaços: ");
+        printf("Introduza um array com espaços: ");
         for (int i = 0; i < tamanho; i++) {
             scanf("%d", &v[i]);
         }
@@ -175,9 +175,9 @@ int main() {
 
         case '5':{
         
-        printf("Introduz o tamanho do array: ");
+        printf("Introduza o tamanho do array: ");
         scanf("%d", &tamanho);
-        printf("Introduz um array com espaços: ");
+        printf("Introduza um array com espaços: ");
         for (int i = 0; i < tamanho; i++) {
             scanf("%d", &v[i]);
         }
@@ -185,52 +185,52 @@ int main() {
         //inverteArray2(v,tamanho);
         inverteArray3(v,tamanho);
         for(int j = 0; j < tamanho; j++) {
-            printf("%d", v[j]);
+            if (j < tamanho - 1) printf("%d -", v[j]);
+            else printf("%d\n",v[j]);
         }
-        printf("\n");
         break;
         }
 
         case '6':{
         
-        printf("Introduz o tamanho do array: ");
+        printf("Introduza o tamanho do array: ");
         scanf("%d", &tamanho);
-        printf("Introduz um array com espaços: ");
+        printf("Introduza um array com espaços: ");
         for (int i = 0; i < tamanho; i++) {
             scanf("%d", &v[i]);
         }
         int max;
         int maximo = maximum (v,tamanho,&max);
-        if (maximo) printf("Tamanho do aray menor que 0\n");
-        else printf("A maior elemento do array é: %d\n",max);
+        if (maximo) printf("Tamanho do array menor que 0\n");
+        else printf("O maior elemento do array é: %d\n",max);
         break;
         }
 
         case '7':{
         
-        printf("Introduz o tamanho do array: ");
+        printf("Introduza o tamanho do array: ");
         scanf("%d", &tamanho);
         quadrados(v,tamanho);
-        printf("O quadrado dos primeiros %d numeros naturais e 0 sao: ", tamanho);
+        printf("O quadrado do 0 e dos primeiros %d numeros naturais sao: ", tamanho-1);
         for(int j = 0; j < tamanho; j++) {
-            printf("%d ", v[j]);
+            if (j < tamanho - 1) printf("%d -", v[j]);
+            else printf("%d\n",v[j]);
         }
-        printf("\n");
         break;
         }
 
         case '8':{
         
-        printf("Introduz a linha: ");
+        printf("Introduza a linha: ");
         scanf("%d", &tamanho);
 
         //alinea a:
         pascal(v,tamanho);
         printf("O %d-ésima linha do triângulo de Pascal tem como valores: ", tamanho);
         for(int j = 0; j < tamanho; j++) {
-            printf("%d ", v[j]);
+            if (j < tamanho - 1) printf("%d -", v[j]);
+            else printf("%d\n",v[j]);
         }
-        printf("\n");
 
         //alinea b:
         pascalB(v,tamanho);
@@ -239,7 +239,7 @@ int main() {
         }
 
         default:
-        printf("Nao inseriste um numero valido :)\n");
+        printf("Nao inseriu um numero valido :)\n");
         
     }
     return 0;

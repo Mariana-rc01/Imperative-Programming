@@ -49,7 +49,8 @@ int retiraVogaisRep1(char *s) {
     int j = 0;
     for(int i = 0; s[i] != '\0'; i++) {
         if (s[i] == s[i+1] && isVogal(s[i])) {
-            contador++;}
+            contador++;
+        }
         else {
             s[j] = s[i];
             j++;
@@ -86,7 +87,7 @@ int duplicaVogais (char *s) {
 
 int duplicaVogais1 (char *s) {
     int tamanho = strlen(s);
-    int j = 2*tamanho + 1;
+    int j = tamanho + contaVogais(s) + 1;
     int contador = 0;
     for (int i = tamanho; i >= 0; i--) {
         if (isVogal(s[i])) {
@@ -106,7 +107,7 @@ int duplicaVogais1 (char *s) {
 // Exercicio 1: (opçao 4)
 
 int ordenado (int v[], int N) {
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N - 1; i++) {
         if (v[i] > v[i+1]) return 0;
     }
     return 1;
@@ -122,7 +123,7 @@ void merge (int a[], int na, int b[], int nb, int r[]) {
             r[i] = b[l]; l++;
         }        
 
-        if (l == nb && l < nb) {
+        if (l == nb && j < na) {
             r[i] = a[j]; j++;
         }
 
@@ -157,24 +158,6 @@ int partition (int v[], int N, int x) {
 }
 
 // Sem usar um array auxiliar:
-
-// 1ª forma:
-
-int partition1 (int v[], int N, int x) {
-    int j = 0, contador = 0;
-    for (int i = 0; i < N; i++) {
-        if (v[i] <= x) {
-            int aux = v[i];
-            v[i] = v[j];
-            v[j] = aux;
-            j++;
-            contador++;
-        }
-    }
-    return contador;
-}
-
-// 2ª forma:
 
 int partition2 (int v[], int N, int x) {
     int a = 0, b = 0;

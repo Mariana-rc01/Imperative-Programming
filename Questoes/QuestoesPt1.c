@@ -94,32 +94,31 @@ int qDig (int n) {
 // Exercicio 7:
 
 char *mystrcat(char s1[], char s2[]) {
-    while(*s1) s1++;
-    while((*s1 = *s2)) {s1++; s2++;}
-    *s1 = '\0';
+    int i, j;
+    for (i = strlen(s1), j = 0; s2[j] != '\0'; i++, j++) {
+        s1[i] = s2[j];
+    }
+    s1[i] = '\0';
     return s1;
 }
 
 // Exercicio 8:
 
-char *mystrcpy(char *dest, char source[]) {
-    char *dest_inicial = dest;
-    while (*source != '\0') {
-        *dest = *source;
-        source++;
-        dest++;
+char *mystrcpy(char s1[], const char s2[]) {
+    int i;
+    for (i = 0; s2[i] != '\0'; i++) {
+        s1[i] = s2[i]; 
     }
-    *dest = '\0';
-    dest = dest_inicial;
-    return dest;
+    s1[i] = '\0';
+    return s1;
 }
 
 // Exercicio 9:
 
-int mystrcmp (char s1[], char s2[]) {
-    int n = 0;
-    while (s1[n] && s1[n] == s2[n]) n++;
-    return s1[n] - s2[n];
+int mystrcmp(char s1[], char s2[]) {
+    int i = 0;
+    while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]) i++;
+    return s1[i] - s2[i];
 }
 
 // Exercicio 10:
@@ -427,6 +426,85 @@ int retiraNeg (int v[], int N){
     }
     return j;
 }
+
+// Exercicio 30:
+
+int menosFreq (int v[], int N){
+    int count = 1, mfreq = N, posicao = v[0], i;
+    for (i = 1; i < N; i++) {
+        if (v[i] == v[i-1]) count++;
+       else {
+           if (count < mfreq) {
+               mfreq = count;
+               posicao = v[i-1];
+           }
+           count = 1;
+       }
+    }
+    if(count < mfreq) {
+        mfreq = count;
+        posicao = v[i-1];
+    }
+   return posicao;
+}
+
+// Exercicio 31:
+
+int maisFreq (int v[], int N){
+    int count = 1, mfreq = 0, posicao = v[0], i;
+    for (i = 1; i < N; i++) {
+        if (v[i] == v[i-1]) count++;
+       else {
+           if (count > mfreq) {
+               mfreq = count;
+               posicao = v[i-1];
+           }
+           count = 1;
+       }
+    }
+    if(count > mfreq) {
+        mfreq = count;
+        posicao = v[i-1];
+    }
+   return posicao;
+}
+
+// Exercicio 32:
+
+int maxCresc (int v[], int N) {
+    int i, count = 1, max = -1;
+    for (i = 0; i < N; i++) {
+        if (v[i] <= v[i+1]) count++;
+        else {
+            if (count > max) max = count;
+            count = 1;
+        }
+    }
+    if (count > max) max = count;
+    return max;
+}
+
+// Exercicio 33:
+
+int search1 (int v[], int x, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        if (v[i] == x) return 1;
+    }
+    return 0;
+}
+
+int elimRep (int v[], int n) {
+    int j = 0, i;
+    for (i = 0; i < n; i++) {
+        if (search1(v+i+1, v[i], n-i-1))
+            continue;
+        else v[j++] = v[i];
+    }
+    return j;
+}
+
+
 
 int main() { // Para testar
     char dest[4] = "Olaa";

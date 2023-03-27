@@ -504,6 +504,122 @@ int elimRep (int v[], int n) {
     return j;
 }
 
+// Exercicio 34:
+
+int elimRepOrd (int v[], int n) {
+    int j = 1, i;
+    for (i = 1; i < n; i++) {
+        if (v[i] == v[i-1]) continue;
+        else v[j++] = v[i];
+    }
+    return j;
+}
+
+// Exercicio 35:
+
+int comunsOrd (int a[], int na, int b[], int nb){
+    int count = 0, i = 0, j = 0;
+    while (i < na && j < nb) {
+        if (a[i] == b[j]) {
+            count++;
+            i++;
+            j++;
+        }
+        else if (a[i] < b[j]) i++;
+        else j++;
+    }
+    return count;
+}
+
+// Exercicio 36:
+
+int search3 (int x, int a[], int n) {
+    int i = 0;
+    for (i; i < n; i++) {
+        if (x == a[i]) return 1;
+    }
+    return 0;
+}
+
+int comuns (int a[], int na, int b[], int nb){
+    int count = 0, i;
+    for (i = 0; i < na; i++) {
+        if (search3(a[i],b, nb)) count++;
+    }
+    return count;
+}
+
+// Exercicio 37:
+
+int minInd (int v[], int n) {
+   int posicao = 0, menor = v[0], i;
+   for (i = 1; i < n; i++) {
+       if (v[i] < menor) {
+           menor = v[i];
+           posicao = i;
+       }
+   }
+    return posicao;
+}
+
+// Exercicio 38:
+
+void somasAc (int v[], int Ac [], int N){
+    int soma = 0, i;
+    for (i = 0; i < N; i++) {
+        soma += v[i];
+        Ac[i] = soma;
+    }
+}
+
+// Exercicio 42:
+
+int unionSet (int N, int v1[N], int v2[N], int r[N]) {
+    int i;
+    for(i = 0; i < N; i++) {
+        r[i] = v1[i] || v2[i];
+    }
+    return 0;
+}
+
+// Exercicio 43:
+
+int intersectSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for(i = 0; i < N; i++) {
+        r[i] = v1[i] && v2[i];
+    }
+    return 0;
+}
+
+// Exercicio 44:
+
+int intersectMSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for(i = 0; i < N; i++) {
+        r[i] = v1[i] < v2[i] ? v1[i] : v2[i];
+    }
+    return 0;
+}
+
+// Exercicio 45:
+
+int unionMSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for(i = 0; i < N; i++) {
+        r[i] = v1[i] > v2[i] ? v1[i] : v2[i];
+    }
+    return 0;
+}
+
+// Exercicio 46:
+
+int cardinalMSet (int N, int v[N]){
+    int count = 0, i;
+    for (i = 0; i < N; i++) 
+        count += v[i];
+   	return count;
+}
 
 
 int main() { // Para testar

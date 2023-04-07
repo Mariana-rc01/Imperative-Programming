@@ -72,6 +72,7 @@ int bitsUm (unsigned int n) {
 // Exercicio 5:
 
 int trailingZ (unsigned int n) {
+    if (n == 0) return 32;
     int contador =  0;
     while (n%2 == 0) {
         contador++;
@@ -219,8 +220,10 @@ int iguaisConsecutivos (char s[]) {
     for (i = 0; s[i] != '\0'; i++) {
         if (s[i] == s[i+1]) count ++;
         else {
-            if (count > maximo) maximo = count;
+            if (count > maximo) {
+            maximo = count;
             count = 1;
+            }
         }
     }
     return maximo;
@@ -372,7 +375,6 @@ int limpaEspacos (char t[]) {
 // Exercicio 26:
 
 void insere (int v[], int n, int x){
-    int i;
     while (n > 0 && v[n-1] >= x) {
         v[n] = v[n-1];
         n--;

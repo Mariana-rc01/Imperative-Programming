@@ -80,19 +80,27 @@ void ordenaPorNum (Aluno t[], int N) {
 
 // Exercicio 4:
 
+void atribuiInd (Aluno t[], int N, int ind[]) {
+	int i, j;
+	Aluno aux;
+	for (i = 0; i < N; i++) {
+		aux = t[i];
+		int auxInd = ind[i];
+		for (j = i; j > 0 && t[j-1].numero > aux.numero; j--) {
+			t[j] = t[j-1];
+			ind[j] = ind[j-1];
+		}
+		t[j] = aux;
+		ind[j] = auxInd;
+	}
+}
+
 void criaIndPorNum (Aluno t[], int N, int ind[]) {
     int i, j;
     for (i = 0; i < N; i++) {
         ind[i] = i;
     }
-    for (i = 0; i < N; i++) {
-        int id = ind[i];
-        Aluno aux = t[id];
-        for (j = i-1; j >= 0 && t[ind[j]].numero > aux.numero; j--) {
-            ind[j+1] = ind[j];
-        }
-        ind[j+1] = id;
-    }
+		atribuiInd(t,N,ind);
 }
 
 // Exercicio 5:
@@ -149,7 +157,7 @@ int main() {
         {95151,
         "Hugo", 
         {2,2,2,2,2},
-        17},
+        19},
 
         {104612,
         "Joana", 
@@ -172,13 +180,13 @@ int main() {
     //ordenaPorNum(t,4);
 
     // Exercicio 4:
-    /*
+    
     int ind[4] = {0};
     criaIndPorNum(t,4,ind);
     for (int i = 0; i < 4; i++) {
         printf("%d\n",ind[i]);
     }
-    */
+    
 
     // Exercicio 5:
     /*

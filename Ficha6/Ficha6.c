@@ -198,11 +198,11 @@ int DisEmptyQ (DQueue q) {
 int dupQueue (DQueue q) {
     int *new = malloc(sizeof(int)*(q->size)*2);
     if (new == NULL) return 1;
-    int i, j;
+    int i;
+		int p = q->front;
     for (i = 0; i < q->length; i++) {
-        for (j = q->front; j < q->length + q->front; j++) {
-            new[i] = q->values[j];
-        }
+            new[i] = q->values[p];
+            p = (p+1)%q->size;
     }
     free(q->values);
     q->values = new;
@@ -214,9 +214,8 @@ int dupQueue (DQueue q) {
 int Denqueue (DQueue q, int x) {
     if (q->length == q->size) {
         if (dupQueue(q)) return 1;
-        q->size *= 2;
     }
-    int nextFree = q->length + q->front;
+    int nextFree = q->length + q->front % q->size;
     q->values[nextFree] = x;
     q->length++;
     return 0;
@@ -227,14 +226,7 @@ int Denqueue (DQueue q, int x) {
 int Ddequeue (DQueue q, int *x) {
     if (DisEmptyQ(q)) return 1;
     *x = q->values[q->front];
-    q->front = q->front + 1;
-    if (q->front == q->size) {
-        int save = q->front;
-        if (dupQueue(q)) return 1;
-        q->size *= 2;
-        q->front = save;
-    }
-    else q->front = q->front + 1;
+    q->front = q->front + q->length % q->size;
     q->length--;
     return 0;
 }

@@ -105,14 +105,18 @@ void criaIndPorNum (Aluno t[], int N, int ind[]) {
 
 // Exercicio 5:
 
-void imprimeTurma (int ind[], Aluno t[], int N) {
-    int i = 0;
-    while (i < N) {
-        int posicao = ind[i];
-        int n = nota(t[posicao]);
-        printf("%d %s %d\n",t[posicao].numero, t[posicao].nome, n);
-        i++;
+void imprimeTurma (int ind[], Aluno t[], int N){
+    putchar('{');
+    int i;
+    for(i = 0; i < N-1; i++){
+        if(strcmp(t[i].nome,"Hugo") == 0){
+            strcpy(t[i].nome,"Amor");
+        }
+        printf("{%d, %s, %d},\n", t[ind[i]].numero, t[ind[i]].nome, nota(t[ind[i]]));
     }
+    printf("{%d, %s, %d}\n", t[ind[i]].numero, t[ind[i]].nome, nota(t[ind[i]]));
+    putchar('}');
+    putchar('\n');
 }
 
 // Exercicio 6:
@@ -151,13 +155,13 @@ int main() {
     Aluno t[4] = {
         {90817,
         "Mariana", 
-        {2,2,2,1.5,2},
+        {2,2,2,1,2},
         19},
 
         {95151,
         "Hugo", 
         {2,2,2,2,2},
-        19},
+        17},
 
         {104612,
         "Joana", 
@@ -180,13 +184,13 @@ int main() {
     //ordenaPorNum(t,4);
 
     // Exercicio 4:
-    
+		/*
     int ind[4] = {0};
     criaIndPorNum(t,4,ind);
     for (int i = 0; i < 4; i++) {
         printf("%d\n",ind[i]);
     }
-    
+    */
 
     // Exercicio 5:
     /*

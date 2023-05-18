@@ -234,13 +234,11 @@ void appendL (LInt *l, int x){
 
 void concatL (LInt *a, LInt b){
 	if ((*a) == NULL) {
-		(*a) = malloc(sizeof(b));
 		(*a) = b;
 		return;
 	}
 	LInt aux = *a;
 	while (aux->prox != NULL) aux = aux->prox;
-	aux->prox = malloc(sizeof(b));
 	aux->prox = b;
 }
 
@@ -410,12 +408,217 @@ LInt parte (LInt l) {
 	return y;
 }
 
+// Árvores Binárias
+
+typedef struct nodo {
+	int valor;
+	struct nodo *esq, *dir;
+} *ABin;
+
+
 // Exercício 28:
 
+int max (int a, int b) {
+	return a > b ? a : b;
+}
 
+int altura (ABin a) {
+	if (a == NULL) return 0;
+	else return (1 + max(altura (a->esq), altura (a->dir)));
+}
 
 // Exercício 29:
 
+ABin cloneAB (ABin a) {
+	if (a == NULL) return NULL;
+	ABin b = malloc(sizeof(struct nodo));
+	b->valor = a->valor;
+	b->esq = cloneAB(a->esq);
+	b->dir = cloneAB(a->dir);
+	return b;
+}
+
+// Exercício 30:
+
+void mirror (ABin *a) {
+	if (*a == NULL) return;
+	ABin aux = (*a)->esq;
+	(*a)->esq = (*a)->dir;
+	(*a)->dir = aux;
+	mirror(&((*a)->esq));
+	mirror(&((*a)->dir));
+}
+
+// Exercício 31:
+
+void inorderAux(ABin a, LInt *l) {
+	LInt aux;
+	if (a != NULL) {
+		inorderAux(a->dir,l);
+
+		aux = malloc(sizeof(struct lligada));
+		aux->valor = a->valor;
+		aux->prox = *l;
+
+		*l = aux;
+
+		inorderAux(a->esq,l);
+	}
+}
+
+void inorder (ABin a, LInt *l) {
+	*l = NULL;
+	inorderAux(a,l);
+}
+
+// Exercício 32:
+
+void preorderAux(ABin a, LInt *l) {
+	LInt aux;
+	if (a != NULL) {
+		preorderAux(a->dir,l);
+
+		preorderAux(a->esq,l);
+
+		aux = malloc(sizeof(struct lligada));
+		aux->valor = a->valor;
+		aux->prox = *l;
+		*l = aux;
+	}
+}
+
+void preorder (ABin a, LInt *l) {
+	*l = NULL;
+	preorderAux(a,l);
+}
+
+// Exercício 33:
+
+
+void posorderAux(ABin a, LInt *l) {
+	LInt aux;
+	if (a != NULL) {
+		aux = malloc(sizeof(struct lligada));
+		aux->valor = a->valor;
+		aux->prox = *l;
+		*l = aux;
+
+		posorderAux(a->dir,l);
+
+		posorderAux(a->esq,l);
+	}
+}
+
+void posorder (ABin a, LInt *l) {
+	*l = NULL;
+	posorderAux(a,l);
+}
+
+// Exercício 34:
+
+int min(a,b) {
+	return a < b ? a : b;
+}
+
+int depth (ABin a, int x) {
+	if (a == NULL) return -1;
+	if (a->valor == x) return 1;
+	int esq = depth(a->esq,x);
+	int dir = depth(a->dir,x);
+
+	if (esq == -1 && dir == -1) return -1;
+	if (esq == -1) return 1 + dir;
+	if (dir == -1) return 1 + esq;
+	if (dir != -1 && esq != -1) return 1 + min(esq,dir);
+}
+
+// Exercício 35:
+
+int freeAB (ABin a) {
+	if (a == NULL) return 0;
+	ABin esq = a->esq;
+	ABin dir = a->dir;
+	free(a);
+	return (1 + freeAB(esq) + freeAB(dir));
+}
+
+// Exercício 36:
+
+int pruneAB (ABin *a, int l) {
+	if (*a == NULL) return 0;
+
+	if (l == 0) {
+		ABin *e = &((*a)->esq);
+		ABin *d = &((*a)->dir);
+		free(*a);
+		*a = NULL;
+		return (1 + pruneAB(e,l) + pruneAB(d,l));
+	}
+	else return (pruneAB(&((*a)->esq),l-1) + pruneAB(&((*a)->dir),l-1));
+}
+
+// Exercício 37:
+
+
+// Exercício 38:
+
+
+// Exercício 39:
+
+
+// Exercício 40:
+
+
+// Exercício 41:
+
+
+// Exercício 42:
+
+
+// Exercício 43:
+
+
+// Exercício 44:
+
+
+// Exercício 45:
+
+
+// Exercício 46:
+
+
+// Exercício 47:
+
+
+// Exercício 48:
+
+
+// Exercício 49:
+
+
+// Exercício 50:
+
+
+// Exercício 51: 1 se for de procura, 0 caso não seja
+
+int todosMenores (ABin a, int x) {
+	if (a == NULL) return 1;
+	if (a->valor >= x) return 0;
+	else return (todosMenores(a->esq,x) && todosMenores(a->dir,x));
+}
+
+int todosMaiores (ABin a, int x) {
+	if (a == NULL) return 1;
+	if (a->valor <= x) return 0;
+	else return (todosMaiores(a->esq,x) && todosMaiores(a->dir,x));
+}
+
+int deProcura (ABin a) {
+	if (a == NULL) return 1;
+	if (todosMenores(a->esq,a->valor) && todosMaiores(a->dir,a->valor))
+		return deProcura(a->esq) && deProcura(a->dir);
+	else return 0;
+}
 
 
 int main() {

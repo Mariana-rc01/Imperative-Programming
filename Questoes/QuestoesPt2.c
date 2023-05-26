@@ -559,45 +559,13 @@ int pruneAB (ABin *a, int l) {
 
 // Exercício 37:
 
-
-// Exercício 38:
-
-
-// Exercício 39:
-
-
-// Exercício 40:
-
-
-// Exercício 41:
-
-
-// Exercício 42:
-
-
-// Exercício 43:
-
-
-// Exercício 44:
-
-
-// Exercício 45:
-
-
-// Exercício 46:
-
-
-// Exercício 47:
-
-
-// Exercício 48:
-
-
-// Exercício 49:
-
-
-// Exercício 50:
-
+int iguaisAB (ABin a, ABin b) {
+	if (a == NULL && b == NULL) return 1;
+	if (a == b) return 1;
+	if (a == NULL && b != NULL) return 0;
+	if (b == NULL && a != NULL) return 0;
+	return (a->valor == b->valor && iguaisAB(a->esq,b->esq) && iguaisAB(a->dir,b->dir));
+}
 
 // Exercício 51: 1 se for de procura, 0 caso não seja
 
